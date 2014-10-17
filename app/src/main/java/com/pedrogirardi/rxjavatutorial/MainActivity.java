@@ -3,7 +3,6 @@ package com.pedrogirardi.rxjavatutorial;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.view.View;
 
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -12,6 +11,7 @@ import com.squareup.okhttp.Response;
 import java.io.IOException;
 
 import rx.Observable;
+import rx.android.events.OnClickEvent;
 import rx.android.observables.ViewObservable;
 import rx.schedulers.Schedulers;
 
@@ -27,9 +27,9 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final Observable<View> refreshClickStream = ViewObservable.clicks(findViewById(R.id.button_execute), false);
+        final Observable<OnClickEvent> refreshClickStream = ViewObservable.clicks(findViewById(R.id.button_execute));
 
-        final Observable<String> requestStream = refreshClickStream.map(view -> {
+        final Observable<String> requestStream = refreshClickStream.map(event -> {
             double randomOffset = Math.floor(Math.random() * 500);
             return "https://api.github.com/users?since" + randomOffset;
         });
@@ -56,8 +56,8 @@ public class MainActivity extends ActionBarActivity {
                 }));
 
         responseStream.subscribe(
-                response -> Log.d(TAG, "Response:[" + response + "]")
-                , error -> Log.e(TAG, "Error", error)
+                response -> Log.d(TAG, "Response:[" + response + "]"),
+                error -> Log.e(TAG, "Error", error)
         );
     }
 
