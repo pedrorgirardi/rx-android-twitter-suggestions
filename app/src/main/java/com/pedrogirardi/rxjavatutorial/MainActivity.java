@@ -138,67 +138,22 @@ public class MainActivity extends ActionBarActivity {
         suggestion1Stream.subscribe(githubUser -> {
             Log.d(TAG, "Suggestion 1:[" + githubUser + "]");
 
-            String id;
-            String login;
-            String url;
+            showSuggestion(githubUser, SuggestionNumber.SUGGESTION_1);
 
-            if (githubUser == null) {
-                id = null;
-                login = null;
-                url = null;
-            } else {
-                id = String.valueOf(githubUser.id);
-                login = githubUser.login;
-                url = githubUser.url;
-            }
-
-            mSuggestion1Id.setText(id);
-            mSuggestion1Login.setText(login);
-            mSuggestion1Url.setText(url);
         }, error -> Log.e(TAG, "Error on suggestion 1", error));
 
         suggestion2Stream.subscribe(githubUser -> {
             Log.d(TAG, "Suggestion 2:[" + githubUser + "]");
 
-            String id;
-            String login;
-            String url;
+            showSuggestion(githubUser, SuggestionNumber.SUGGESTION_2);
 
-            if (githubUser == null) {
-                id = null;
-                login = null;
-                url = null;
-            } else {
-                id = String.valueOf(githubUser.id);
-                login = githubUser.login;
-                url = githubUser.url;
-            }
-
-            mSuggestion2Id.setText(id);
-            mSuggestion2Login.setText(login);
-            mSuggestion2Url.setText(url);
         }, error -> Log.e(TAG, "Error on suggestion 2", error));
 
         suggestion3Stream.subscribe(githubUser -> {
             Log.d(TAG, "Suggestion 3:[" + githubUser + "]");
 
-            String id;
-            String login;
-            String url;
+            showSuggestion(githubUser, SuggestionNumber.SUGGESTION_3);
 
-            if (githubUser == null) {
-                id = null;
-                login = null;
-                url = null;
-            } else {
-                id = String.valueOf(githubUser.id);
-                login = githubUser.login;
-                url = githubUser.url;
-            }
-
-            mSuggestion3Id.setText(id);
-            mSuggestion3Login.setText(login);
-            mSuggestion3Url.setText(url);
         }, error -> Log.e(TAG, "Error on suggestion 3", error));
     }
 
@@ -214,6 +169,48 @@ public class MainActivity extends ActionBarActivity {
                 })
                 .mergeWith(refreshClickStream.map(event -> null))
                 .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    private void showSuggestion(GithubUser githubUser, SuggestionNumber suggestionNumber) {
+        String id;
+        String login;
+        String url;
+
+        if (githubUser == null) {
+            id = null;
+            login = null;
+            url = null;
+        } else {
+            id = String.valueOf(githubUser.id);
+            login = githubUser.login;
+            url = githubUser.url;
+        }
+
+
+        switch (suggestionNumber) {
+            case SUGGESTION_1:
+                mSuggestion1Id.setText(id);
+                mSuggestion1Login.setText(login);
+                mSuggestion1Url.setText(url);
+                break;
+            case SUGGESTION_2:
+                mSuggestion2Id.setText(id);
+                mSuggestion2Login.setText(login);
+                mSuggestion2Url.setText(url);
+                break;
+            case SUGGESTION_3:
+                mSuggestion3Id.setText(id);
+                mSuggestion3Login.setText(login);
+                mSuggestion3Url.setText(url);
+                break;
+        }
+
+    }
+
+    enum SuggestionNumber {
+        SUGGESTION_1,
+        SUGGESTION_2,
+        SUGGESTION_3,
     }
 
 }
