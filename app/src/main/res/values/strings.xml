@@ -3,6 +3,19 @@
 
     <string name="app_name">RxJavaTutorial</string>
     <string name="hello_world">Hello world!</string>
-    <string name="button_execute">Execute</string>
+    <string name="button_refresh">Refresh</string>
+
+    <string name="suggestion1_id">Suggestion1, ID</string>
+    <string name="suggestion1_login">Suggestion1, Login</string>
+    <string name="suggestion1_url">Suggestion1, URL</string>
+
+    <string name="suggestion2_id">Suggestion2, ID</string>
+    <string name="suggestion2_login">Suggestion2, Login</string>
+    <string name="suggestion2_url">Suggestion2, URL</string>
+
+    <string name="suggestion3_id">Suggestion3, ID</string>
+    <string name="suggestion3_login">Suggestion3, Login</string>
+    <string name="suggestion3_url">Suggestion3, URL</string>
+    <string name="button_close">Close</string>
 
 </resources>

@@ -50,4 +50,5 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp-urlconnection:2.0.0'
     compile 'io.reactivex:rxandroid:0.22.0'
     compile 'commons-io:commons-io:2.4'
+    compile 'com.jakewharton:butterknife:5.1.2'
 }

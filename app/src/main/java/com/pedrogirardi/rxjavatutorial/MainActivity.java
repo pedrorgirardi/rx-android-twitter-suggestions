@@ -3,7 +3,8 @@ package com.pedrogirardi.rxjavatutorial;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.widget.Toast;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -16,6 +17,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 import rx.Observable;
 import rx.android.events.OnClickEvent;
 import rx.android.observables.ViewObservable;
@@ -29,12 +32,59 @@ public class MainActivity extends ActionBarActivity {
 
     private final OkHttpClient mOkHttpClient = new OkHttpClient();
 
+    @InjectView(R.id.suggestion1_id)
+    TextView mSuggestion1Id;
+
+    @InjectView(R.id.suggestion1_login)
+    TextView mSuggestion1Login;
+
+    @InjectView(R.id.suggestion1_url)
+    TextView mSuggestion1Url;
+
+    @InjectView(R.id.suggestion2_id)
+    TextView mSuggestion2Id;
+
+    @InjectView(R.id.suggestion2_login)
+    TextView mSuggestion2Login;
+
+    @InjectView(R.id.suggestion2_url)
+    TextView mSuggestion2Url;
+
+    @InjectView(R.id.suggestion3_id)
+    TextView mSuggestion3Id;
+
+    @InjectView(R.id.suggestion3_login)
+    TextView mSuggestion3Login;
+
+    @InjectView(R.id.suggestion3_url)
+    TextView mSuggestion3Url;
+
+    @InjectView(R.id.button_close_1)
+    Button mClose1;
+
+    @InjectView(R.id.button_close_2)
+    Button mClose2;
+
+    @InjectView(R.id.button_close_3)
+    Button mClose3;
+
+    @InjectView(R.id.button_refresh)
+    Button mRefresh;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final Observable<OnClickEvent> refreshClickStream = ViewObservable.clicks(findViewById(R.id.button_execute));
+        ButterKnife.inject(this);
+
+        final Observable<OnClickEvent> close1ClickStream = ViewObservable.clicks(mClose1);
+
+        final Observable<OnClickEvent> close2ClickStream = ViewObservable.clicks(mClose2);
+
+        final Observable<OnClickEvent> close3ClickStream = ViewObservable.clicks(mClose3);
+
+        final Observable<OnClickEvent> refreshClickStream = ViewObservable.clicks(mRefresh);
 
         final Observable<String> requestStream = refreshClickStream
                 .startWith(new OnClickEvent(null)) // emulate a click when the activity starts
@@ -76,16 +126,94 @@ public class MainActivity extends ActionBarActivity {
                     }
                 }));
 
-        responseStream
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        response -> {
-                            Log.d(TAG, "Response:[" + response + "]");
+        final Observable<GithubUser> suggestion1Stream =
+                createSuggestionStream(close1ClickStream, responseStream, refreshClickStream);
 
-                            Toast.makeText(this, "Done(#" + response.size() + ")", Toast.LENGTH_SHORT).show();
-                        },
-                        error -> Log.e(TAG, "Error", error)
-                );
+        final Observable<GithubUser> suggestion2Stream =
+                createSuggestionStream(close2ClickStream, responseStream, refreshClickStream);
+
+        final Observable<GithubUser> suggestion3Stream =
+                createSuggestionStream(close3ClickStream, responseStream, refreshClickStream);
+
+        suggestion1Stream.subscribe(githubUser -> {
+            Log.d(TAG, "Suggestion 1:[" + githubUser + "]");
+
+            String id;
+            String login;
+            String url;
+
+            if (githubUser == null) {
+                id = null;
+                login = null;
+                url = null;
+            } else {
+                id = String.valueOf(githubUser.id);
+                login = githubUser.login;
+                url = githubUser.url;
+            }
+
+            mSuggestion1Id.setText(id);
+            mSuggestion1Login.setText(login);
+            mSuggestion1Url.setText(url);
+        }, error -> Log.e(TAG, "Error on suggestion 1", error));
+
+        suggestion2Stream.subscribe(githubUser -> {
+            Log.d(TAG, "Suggestion 2:[" + githubUser + "]");
+
+            String id;
+            String login;
+            String url;
+
+            if (githubUser == null) {
+                id = null;
+                login = null;
+                url = null;
+            } else {
+                id = String.valueOf(githubUser.id);
+                login = githubUser.login;
+                url = githubUser.url;
+            }
+
+            mSuggestion2Id.setText(id);
+            mSuggestion2Login.setText(login);
+            mSuggestion2Url.setText(url);
+        }, error -> Log.e(TAG, "Error on suggestion 2", error));
+
+        suggestion3Stream.subscribe(githubUser -> {
+            Log.d(TAG, "Suggestion 3:[" + githubUser + "]");
+
+            String id;
+            String login;
+            String url;
+
+            if (githubUser == null) {
+                id = null;
+                login = null;
+                url = null;
+            } else {
+                id = String.valueOf(githubUser.id);
+                login = githubUser.login;
+                url = githubUser.url;
+            }
+
+            mSuggestion3Id.setText(id);
+            mSuggestion3Login.setText(login);
+            mSuggestion3Url.setText(url);
+        }, error -> Log.e(TAG, "Error on suggestion 3", error));
+    }
+
+    private Observable<GithubUser> createSuggestionStream(Observable<OnClickEvent> closeClickStream,
+                                                          Observable<List<GithubUser>> responseStream,
+                                                          Observable<OnClickEvent> refreshClickStream) {
+        return Observable.combineLatest(
+                closeClickStream.startWith(new OnClickEvent(null)),
+                responseStream,
+                (event, list) -> {
+                    int index = (int) Math.floor(Math.random() * list.size());
+                    return list.get(index);
+                })
+                .mergeWith(refreshClickStream.map(event -> null))
+                .observeOn(AndroidSchedulers.mainThread());
     }
 
 }
