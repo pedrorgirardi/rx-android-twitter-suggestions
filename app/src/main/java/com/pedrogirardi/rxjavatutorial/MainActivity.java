@@ -1,34 +1,10 @@
 package com.pedrogirardi.rxjavatutorial;
 
-import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
-import android.widget.Button;
-import android.widget.TextView;
-
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import butterknife.ButterKnife;
-import butterknife.InjectView;
-import rx.GitHubUser;
-import rx.Observable;
-import rx.android.events.OnClickEvent;
-import rx.android.observables.ViewObservable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 
 public class MainActivity extends ActionBarActivity {
-
+/*
     static private final String TAG = MainActivity.class.getSimpleName();
 
     private final OkHttpClient mOkHttpClient = new OkHttpClient();
@@ -212,6 +188,6 @@ public class MainActivity extends ActionBarActivity {
         SUGGESTION_1,
         SUGGESTION_2,
         SUGGESTION_3,
-    }
+    }*/
 
 }

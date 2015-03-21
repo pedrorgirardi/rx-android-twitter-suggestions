@@ -60,7 +60,8 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.0.0'
 
     // Rx
-    compile 'io.reactivex:rxandroid:0.22.0'
+    compile 'io.reactivex:rxandroid:0.24.0'
+    compile 'io.reactivex:rxandroid-framework:0.24.0'
 
     // Square OktHttp
     compile 'com.squareup.okhttp:okhttp:2.0.0'
