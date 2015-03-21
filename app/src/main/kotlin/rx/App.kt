@@ -6,6 +6,9 @@ import android.util.Log
 import com.pedrogirardi.rxjavatutorial.R
 import com.squareup.okhttp.OkHttpClient
 import com.squareup.okhttp.Request
+import kotlinx.android.synthetic.activity_main.closeSuggestion1Button
+import kotlinx.android.synthetic.activity_main.closeSuggestion2Button
+import kotlinx.android.synthetic.activity_main.closeSuggestion3Button
 import kotlinx.android.synthetic.activity_main.refreshButton
 import org.json.JSONArray
 import rx.android.schedulers.AndroidSchedulers
@@ -72,6 +75,12 @@ class MainActivity : ActionBarActivity() {
         setContentView(R.layout.activity_main)
 
         val gitHubClient = GitHubClient()
+
+        val closeSuggestion1ClickStream = ViewObservable.clicks(closeSuggestion1Button)
+
+        val closeSuggestion2ClickStream = ViewObservable.clicks(closeSuggestion2Button)
+
+        val closeSuggestion3ClickStream = ViewObservable.clicks(closeSuggestion3Button)
 
         val refreshClickStream = ViewObservable.clicks(refreshButton, true)
 
