@@ -1,8 +1,12 @@
 package rx
 
+import android.os.Bundle
+import android.support.v7.app.ActionBarActivity
+import com.pedrogirardi.rxjavatutorial.R
 import com.squareup.okhttp.OkHttpClient
 import com.squareup.okhttp.Request
 import org.json.JSONArray
+
 
 /**
  * Created by pgirardi on 3/21/15.
@@ -41,4 +45,13 @@ class GitHubClient {
         }
     }
 
+}
+
+class MainActivity : ActionBarActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        setContentView(R.layout.activity_main)
+    }
 }
