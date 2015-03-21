@@ -73,7 +73,7 @@ class MainActivity : ActionBarActivity() {
 
         val gitHubClient = GitHubClient()
 
-        val refreshClickStream = ViewObservable.clicks(refreshButton)
+        val refreshClickStream = ViewObservable.clicks(refreshButton, true)
 
         val gitHubUsersStream = refreshClickStream
                 .observeOn(Schedulers.io())
