@@ -19,6 +19,7 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import rx.GitHubUser;
 import rx.Observable;
 import rx.android.events.OnClickEvent;
 import rx.android.observables.ViewObservable;
@@ -93,7 +94,7 @@ public class MainActivity extends ActionBarActivity {
                     return "https://api.github.com/users?since" + randomOffset;
                 });
 
-        final Observable<List<GithubUser>> responseStream = requestStream
+        final Observable<List<GitHubUser>> responseStream = requestStream
                 .observeOn(Schedulers.io())
                 .flatMap(url -> Observable.create(subscriber -> {
 
@@ -105,14 +106,14 @@ public class MainActivity extends ActionBarActivity {
                     try {
                         Response response = mOkHttpClient.newCall(request).execute();
 
-                        List<GithubUser> list = new ArrayList<GithubUser>();
+                        List<GitHubUser> list = new ArrayList<GitHubUser>();
 
                         JSONArray users = new JSONArray(response.body().string());
 
                         for (int i = 0; i < users.length(); i++) {
                             JSONObject user = users.getJSONObject(i);
 
-                            list.add(new GithubUser(user.getInt("id"),
+                            list.add(new GitHubUser(user.getInt("id"),
                                     user.getString("login"),
                                     user.getString("url")));
                         }
@@ -126,13 +127,13 @@ public class MainActivity extends ActionBarActivity {
                     }
                 }));
 
-        final Observable<GithubUser> suggestion1Stream =
+        final Observable<GitHubUser> suggestion1Stream =
                 createSuggestionStream(close1ClickStream, responseStream, refreshClickStream);
 
-        final Observable<GithubUser> suggestion2Stream =
+        final Observable<GitHubUser> suggestion2Stream =
                 createSuggestionStream(close2ClickStream, responseStream, refreshClickStream);
 
-        final Observable<GithubUser> suggestion3Stream =
+        final Observable<GitHubUser> suggestion3Stream =
                 createSuggestionStream(close3ClickStream, responseStream, refreshClickStream);
 
         suggestion1Stream.subscribe(githubUser -> {
@@ -157,8 +158,8 @@ public class MainActivity extends ActionBarActivity {
         }, error -> Log.e(TAG, "Error on suggestion 3", error));
     }
 
-    private Observable<GithubUser> createSuggestionStream(Observable<OnClickEvent> closeClickStream,
-                                                          Observable<List<GithubUser>> responseStream,
+    private Observable<GitHubUser> createSuggestionStream(Observable<OnClickEvent> closeClickStream,
+                                                          Observable<List<GitHubUser>> responseStream,
                                                           Observable<OnClickEvent> refreshClickStream) {
         return Observable.combineLatest(
                 closeClickStream.startWith(new OnClickEvent(null)),
@@ -171,7 +172,7 @@ public class MainActivity extends ActionBarActivity {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    private void showSuggestion(GithubUser githubUser, SuggestionNumber suggestionNumber) {
+    private void showSuggestion(GitHubUser githubUser, SuggestionNumber suggestionNumber) {
         String id;
         String login;
         String url;
@@ -181,9 +182,9 @@ public class MainActivity extends ActionBarActivity {
             login = null;
             url = null;
         } else {
-            id = String.valueOf(githubUser.id);
-            login = githubUser.login;
-            url = githubUser.url;
+            id = String.valueOf(githubUser.getId());
+            login = githubUser.getLogin();
+            url = githubUser.getUrl();
         }
 
 
