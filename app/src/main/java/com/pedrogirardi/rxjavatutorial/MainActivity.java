@@ -106,7 +106,7 @@ public class MainActivity extends ActionBarActivity {
                     try {
                         Response response = mOkHttpClient.newCall(request).execute();
 
-                        List<GitHubUser> list = new ArrayList<GitHubUser>();
+                        List<GitHubUser> list = new ArrayList<>();
 
                         JSONArray users = new JSONArray(response.body().string());
 
