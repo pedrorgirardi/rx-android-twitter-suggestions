@@ -9,26 +9,26 @@
     tools:context=".MainActivity">
 
     <LinearLayout
-        android:id="@+id/suggestion1"
+        android:id="@+id/suggestion1Layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="8dp"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/suggestion1_id"
+            android:id="@+id/suggestion1IdText"
             android:text="@string/suggestion1_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TextView
-            android:id="@+id/suggestion1_login"
+            android:id="@+id/suggestion1LoginText"
             android:text="@string/suggestion1_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TextView
-            android:id="@+id/suggestion1_url"
+            android:id="@+id/suggestion1UrlText"
             android:text="@string/suggestion1_url"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -36,27 +36,27 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/suggestion2"
+        android:id="@+id/suggestion2Layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/suggestion1"
+        android:layout_below="@id/suggestion1Layout"
         android:padding="8dp"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/suggestion2_id"
+            android:id="@+id/suggestion2IdText"
             android:text="@string/suggestion2_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TextView
-            android:id="@+id/suggestion2_login"
+            android:id="@+id/suggestion2LoginText"
             android:text="@string/suggestion2_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TextView
-            android:id="@+id/suggestion2_url"
+            android:id="@+id/suggestion2UrlText"
             android:text="@string/suggestion2_url"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -64,27 +64,27 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/suggestion3"
+        android:id="@+id/suggestion3Layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/suggestion2"
+        android:layout_below="@id/suggestion2Layout"
         android:padding="8dp"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/suggestion3_id"
+            android:id="@+id/suggestion3IdText"
             android:text="@string/suggestion3_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TextView
-            android:id="@+id/suggestion3_login"
+            android:id="@+id/suggestion3LoginText"
             android:text="@string/suggestion3_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TextView
-            android:id="@+id/suggestion3_url"
+            android:id="@+id/suggestion3UrlText"
             android:text="@string/suggestion3_url"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -92,7 +92,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button_refresh"
+        android:id="@+id/refreshButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -100,7 +100,7 @@
         android:text="@string/button_refresh" />
 
     <Button
-        android:id="@+id/button_close_1"
+        android:id="@+id/closeSuggestion1Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -109,21 +109,21 @@
         android:text="@string/button_close" />
 
     <Button
-        android:id="@+id/button_close_2"
+        android:id="@+id/closeSuggestion2Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/suggestion1"
-        android:layout_alignLeft="@+id/button_close_1"
-        android:layout_alignStart="@+id/button_close_1"
+        android:layout_below="@+id/suggestion1Layout"
+        android:layout_alignLeft="@+id/closeSuggestion1Button"
+        android:layout_alignStart="@+id/closeSuggestion1Button"
         android:text="@string/button_close" />
 
     <Button
-        android:id="@+id/button_close_3"
+        android:id="@+id/closeSuggestion3Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/suggestion2"
-        android:layout_alignLeft="@+id/button_close_1"
-        android:layout_alignStart="@+id/button_close_1"
+        android:layout_below="@+id/suggestion2Layout"
+        android:layout_alignLeft="@+id/closeSuggestion1Button"
+        android:layout_alignStart="@+id/closeSuggestion1Button"
         android:text="@string/button_close" />
 
 </RelativeLayout>

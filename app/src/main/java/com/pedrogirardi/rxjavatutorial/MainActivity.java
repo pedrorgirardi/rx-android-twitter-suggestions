@@ -33,43 +33,43 @@ public class MainActivity extends ActionBarActivity {
 
     private final OkHttpClient mOkHttpClient = new OkHttpClient();
 
-    @InjectView(R.id.suggestion1_id)
+    @InjectView(R.id.suggestion1IdText)
     TextView mSuggestion1Id;
 
-    @InjectView(R.id.suggestion1_login)
+    @InjectView(R.id.suggestion1LoginText)
     TextView mSuggestion1Login;
 
-    @InjectView(R.id.suggestion1_url)
+    @InjectView(R.id.suggestion1UrlText)
     TextView mSuggestion1Url;
 
-    @InjectView(R.id.suggestion2_id)
+    @InjectView(R.id.suggestion2IdText)
     TextView mSuggestion2Id;
 
-    @InjectView(R.id.suggestion2_login)
+    @InjectView(R.id.suggestion2LoginText)
     TextView mSuggestion2Login;
 
-    @InjectView(R.id.suggestion2_url)
+    @InjectView(R.id.suggestion2UrlText)
     TextView mSuggestion2Url;
 
-    @InjectView(R.id.suggestion3_id)
+    @InjectView(R.id.suggestion3IdText)
     TextView mSuggestion3Id;
 
-    @InjectView(R.id.suggestion3_login)
+    @InjectView(R.id.suggestion3LoginText)
     TextView mSuggestion3Login;
 
-    @InjectView(R.id.suggestion3_url)
+    @InjectView(R.id.suggestion3UrlText)
     TextView mSuggestion3Url;
 
-    @InjectView(R.id.button_close_1)
+    @InjectView(R.id.closeSuggestion1Button)
     Button mClose1;
 
-    @InjectView(R.id.button_close_2)
+    @InjectView(R.id.closeSuggestion2Button)
     Button mClose2;
 
-    @InjectView(R.id.button_close_3)
+    @InjectView(R.id.closeSuggestion3Button)
     Button mClose3;
 
-    @InjectView(R.id.button_refresh)
+    @InjectView(R.id.refreshButton)
     Button mRefresh;
 
     @Override
