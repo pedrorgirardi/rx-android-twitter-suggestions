@@ -5,10 +5,13 @@ buildscript {
 
     dependencies {
         classpath 'me.tatarka:gradle-retrolambda:2.4.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlinVersion"
     }
 }
 
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 apply plugin: 'retrolambda'
 
 android {
@@ -30,6 +33,10 @@ android {
         }
     }
 
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -45,10 +52,20 @@ retrolambda {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    // Kotlin
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+
+    // Support
     compile 'com.android.support:appcompat-v7:22.0.0'
+
+    // Rx
+    compile 'io.reactivex:rxandroid:0.22.0'
+
+    // Square OktHttp
     compile 'com.squareup.okhttp:okhttp:2.0.0'
     compile 'com.squareup.okhttp:okhttp-urlconnection:2.0.0'
-    compile 'io.reactivex:rxandroid:0.22.0'
+
     compile 'commons-io:commons-io:2.4'
     compile 'com.jakewharton:butterknife:5.1.2'
 }
